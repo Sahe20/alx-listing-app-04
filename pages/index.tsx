@@ -22,7 +22,7 @@ export default function HomePage() {
     // Fetch property data
     const fetchProperties = async () => {
       try {
-        const res = await fetch('https://mysampleapi.com'); 
+        const res = await fetch('https://mocki.io/v1/9b9e6b00-e0a6-4296-8249-59a27f8afaa1'); 
         if (!res.ok) throw new Error('Failed to fetch properties');
         const data = await res.json();
         setProperties(data);
@@ -41,20 +41,26 @@ export default function HomePage() {
 
   return (
     <main>
-      <section className="w-full min-h-screen">
-        <div className="hero-section p-[3em] md:py-[8em] lg:py-[14em] mx-4 md:mx-8 rounded-2xl">
-          <div className="text-center text-white max-w-[100%]">
-            <h1 className="text-3xl md:text-4xl lg:text-7xl text-center">
-              Find your favorite place here!
-            </h1>
-            <p className="text-xs md:text-lg lg:text-2xl">
-              The best prices for over 2 million properties worldwide
-            </p>
-          </div>
+      <div className="hero-section p-[3em] md:py-[8em] lg:py-[14em] mx-4 md:mx-8 rounded-2xl">
+        <div className="text-center text-white max-w-[100%]">
+          <h1 className="text-3xl md:text-4xl lg:text-7xl text-center">
+            Find your favorite place here!
+          </h1>
+          <p className="text-xs md:text-lg lg:text-2xl">
+            The best prices for over 2 million properties worldwide
+          </p>
         </div>
-        <FilterSection />
-        <PropertyListing />
-      </section>
+      </div>
+      <div className="p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {properties.map((property) => (
+          <div key={property.id} className="bg-white rounded-lg shadow-md p-4">
+            <img src={property.imageUrl} alt={property.title} className="w-full h-48 object-cover rounded" />
+            <h2 className="text-xl font-bold mt-2">{property.title}</h2>
+            <p className="text-sm text-gray-500">{property.location}</p>
+            <p className="text-gray-700 mt-2">${property.price}/night</p>
+          </div>
+        ))}
+      </div>
     </main>
   );
 };
