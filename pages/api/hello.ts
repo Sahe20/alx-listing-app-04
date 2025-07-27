@@ -5,8 +5,6 @@ type Data = {
   name: string;
 };
 
-const res = await fetch("/api/properties"); 
-
 export default function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>,
