@@ -6,7 +6,7 @@ interface ReviewSectionProps {
 }
 
 interface Review {
-  id: number;
+  id: string;
   comment: string;
   // Add other fields if needed
 }
