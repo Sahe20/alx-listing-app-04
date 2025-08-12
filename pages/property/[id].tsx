@@ -6,16 +6,14 @@ import PropertyDetail from "@/components/property/PropertyDetail";
 export default function PropertyDetailPage() {
   const router = useRouter();
   const { id } = router.query;
-
   const [property, setProperty] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (!id) return;
-
     const fetchProperty = async () => {
+      if (!id) return;
       try {
-        const response = await axios.get(`https://mocki.io/v1/fc8bb081-6cbd-4e99-8860-9b7d655f4d32`);
+        const response = await axios.get(`/api/properties/${id}`);
         setProperty(response.data);
       } catch (error) {
         console.error("Error fetching property details:", error);
@@ -27,9 +25,13 @@ export default function PropertyDetailPage() {
     fetchProperty();
   }, [id]);
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) {
+    return <p>Loading...</p>;
+  }
 
-  if (!property) return <p>Property not found.</p>;
+  if (!property) {
+    return <p>Property not found</p>;
+  }
 
   return <PropertyDetail property={property} />;
 }
